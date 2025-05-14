@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sửa User</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-100">
+  <nav class="bg-blue-600 text-white p-4">
+    <div class="container mx-auto flex justify-between">
+      <h1 class="text-2xl font-bold">Admin Panel</h1>
+      <a href="/logout" class="bg-red-500 px-4 py-2 rounded hover:bg-red-600">Đăng xuất</a>
+    </div>
+  </nav>
+  <div class="container mx-auto p-4">
+    <h2 class="text-xl font-bold mb-4">Sửa User</h2>
+    <% if (error) { %>
+      <p class="text-red-500 mb-4"><%= error %></p>
+    <% } %>
+    <form action="/admin/users/edit/<%= user._id %>" method="POST" class="bg-white p-4 rounded shadow" onsubmit="return confirm('Bạn có chắc muốn sửa user này?');">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-gray-700 mb-2">Name</label>
+          <input type="text" name="name" value="<%= user.name %>" class="w-full p-2 border rounded" required>
+        </div>
+        <div>
+          <label class="block text-gray-700 mb-2">Machine ID</label>
+          <input type="text" name="machine_id" value="<%= user.machine_id %>" class="w-full p-2 border rounded" required>
+        </div>
+        <div>
+          <label class="block text-gray-700 mb-2">Plan</label>
+          <select name="plan" class="w-full p-2 border rounded" required>
+            <option value="free" <%= user.plan === 'free' ? 'selected' : '' %>>Free</option>
+            <option value="month" <%= user.plan === 'month' ? 'selected' : '' %>>Month</option>
+            <option value="unlimit" <%= user.plan === 'unlimit' ? 'selected' : '' %>>Unlimit</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-700 mb-2">Activate Time (DD/MM/YYYY HH:mm)</label>
+          <input type="text" name="activate_time" value="<%= user.activate_time %>" class="w-full p-2 border rounded" required>
+        </div>
+        <div>
+          <label class="block text-gray-700 mb-2">Expire Time (DD/MM/YYYY HH:mm)</label>
+          <input type="text" name="expire_time" value="<%= user.expire_time %>" class="w-full p-2 border rounded" required>
+        </div>
+        <div>
+          <label class="block text-gray-700 mb-2">Note</label>
+          <input type="text" name="note" value="<%= user.note %>" class="w-full p-2 border rounded">
+        </div>
+        <div>
+          <label class="block text-gray-700 mb-2">Count</label>
+          <input type="number" name="count" value="<%= user.count %>" class="w-full p-2 border rounded" required>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Sửa</button>
+        <a href="/admin?tab=users" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 ml-2">Hủy</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
