@@ -4,7 +4,7 @@ const axios = require('axios');
 const path = require('path');
 const app = express();
 
-const API_BASE_URL = 'http://localhost:3090/api'; // Đã xác nhận đúng
+const API_BASE_URL = 'https://api.hieuphungfpt.sbs/api'; // Đã xác nhận đúng
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
